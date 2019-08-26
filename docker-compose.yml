@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+
+  php-apache:
+    image: php:7.3-apache
+    volumes:
+      - ./www:/var/www/html
+    ports:
+      - "80:80"
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=p455w0rd
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # mgmt services
+  portainer:
+    image: portainer/portainer
+    volumes:
+      - portainer-data:/data
+    ports:
+      - "9000:9000"
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+    ports:
+     - "8080:8080"
+
+volumes:
+  mysql-data:
+    driver: local
+  portainer-data:
+    driver: local
