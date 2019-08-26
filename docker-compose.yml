@@ -19,13 +19,6 @@ services:
       - "3306:3306"
 
   # mgmt services
-  portainer:
-    image: portainer/portainer
-    volumes:
-      - portainer-data:/data
-    ports:
-      - "9000:9000"
-
   pma:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -35,6 +28,4 @@ services:
 
 volumes:
   mysql-data:
-    driver: local
-  portainer-data:
     driver: local
